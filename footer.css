@@ -1,0 +1,54 @@
+@font-face {
+  font-family: "dm-mono";
+  src: url("fonts/dm-mono-light.woff2") format("woff2"),
+       url("fonts/dm-mono-light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+
+.footer {
+    font-family: "dm-mono", monospace;
+}
+.footer a.footer-link {
+    font-family: "dm-mono", monospace;
+}
+
+.footer {
+    position: fixed;        /* sit on top of the map */
+    bottom: 0;              /* stick to the bottom */
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: left; /* center the links horizontally */
+    align-items: left;     /* vertical alignment */
+    gap: 20px;
+
+    padding: 5px 15px;
+    background: rgba(213, 210, 205); /* slightly transparent */
+    border-top: 1px solid black;
+    font-family: "dm-mono";
+    font-size: 18px;
+    font-weight: 400;
+    
+    text-transform: uppercase;
+    letter-spacing: 0.14px;
+    color: black;
+    z-index: 9999;          /* on top of map tiles */
+    pointer-events: auto;    /* allow clicks on the footer links */
+}
+
+.footer a{
+   font-family: "dm-mono";
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.14px;
+    color: black;
+
+    text-align:center;
+    border: 1px solid black;
+    padding: 10px 20px;    
+    line-height: 1;    
+
+}

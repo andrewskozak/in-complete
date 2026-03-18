@@ -1,0 +1,453 @@
+h1{
+    color:black;
+    font-size:10px;
+    text-transform: uppercase;
+    font-weight:400;
+    display: flex;
+flex-direction: column;
+justify-content: center;
+align-self: stretch;
+font-family:"dm-mono";
+font-size: 18px;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+letter-spacing: 0.14px;
+}
+
+/* DM Mono Light */
+@font-face {
+  font-family: "dm-mono";
+  src: url("fonts/dm-mono-light.woff2") format("woff2"),
+       url("fonts/dm-mono-light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* DM Mono Light Italic */
+@font-face {
+  font-family: "dm-mono";
+  src: url("fonts/dm-mono-light-italic.woff2") format("woff2"),
+       url("fonts/dm-mono-light-italic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* DM Mono Regular */
+@font-face {
+  font-family: "dm-mono";
+  src: url("fonts/dm-mono-regular.woff2") format("woff2"),
+       url("fonts/dm-mono-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* DM Mono Italic */
+@font-face {
+  font-family: "dm-mono";
+  src: url("fonts/dm-mono-italic.woff2") format("woff2"),
+       url("fonts/dm-mono-italic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* DM Mono Medium */
+@font-face {
+  font-family: "dm-mono";
+  src: url("fonts/dm-mono-medium.woff2") format("woff2"),
+       url("fonts/dm-mono-medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* DM Mono Medium Italic */
+@font-face {
+  font-family: "dm-mono";
+  src: url("fonts/dm-mono-medium-italic.woff2") format("woff2"),
+       url("fonts/dm-mono-medium-italic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* ABOUT ELEMENTS*/
+.background{
+background: rgba(213, 210, 205, 0.60);
+display: flex;
+width: 800px;
+padding: 40px 80px 40px 40px;
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+border:1px solid black;
+
+}
+h2 {
+  font-family: "dm-mono";
+  font-size: 22px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 2.16px;
+  color: black;
+
+  display: inline-block;    
+  border: 1px solid black; 
+  padding: 20px 50px;       
+  line-height: 1;       
+}
+
+.title-row{
+    display:flex;
+    align-items:center;
+    gap:60px;
+    align-self:stretch;
+}
+
+/* SIDEBAR ELEMENTS*/
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background: rgba(213, 210, 205, 0.6);
+    width: 150px;
+    min-height:100vh;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    border:1px solid black;
+}
+
+.sidebar h1 {
+    font-family: dm-mono;
+    font-size: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.14px;
+    color: black;
+
+    text-align:center;
+    border: 1px solid black;
+    padding: 15px 8px;     
+    line-height: 1;       
+}
+
+/* FOOTER ELEMENTS*/
+.footer {
+    position: fixed;        /* sit on top of the map */
+    bottom: 0;              /* stick to the bottom */
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: left; /* center the links horizontally */
+    align-items: left;     /* vertical alignment */
+    gap: 20px;
+
+    padding: 5px, 5px;
+    padding-bottom: 10px;
+    padding-top:10px;
+    background: rgba(213, 210, 205,);
+    border-top: 1px solid black;
+    font-family: "dm-mono";
+    font-size: 18px;
+    font-weight: 400;
+    
+    text-transform: uppercase;
+    letter-spacing: 0.14px;
+    color: black;
+    z-index: 9999;          /* on top of map tiles */
+    pointer-events: auto;    /* allow clicks on the footer links */
+}
+
+.footer a{
+   font-family: "dm-mono";
+    font-size: 15px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.14px;
+    color: black;
+
+    text-align:center;
+    border: 1px solid black;
+    padding: 8px 30px;    
+    line-height: 1;    
+
+}
+
+
+/* TEASER ELEMENTS */
+
+.teaser-background {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px; /* space between elements */
+
+    width: 375px; /* change this to adjust the teaser width */
+    background: rgba(213, 210, 205);
+    border: 1px solid #000;
+    box-sizing: border-box;
+
+    padding: 13px 0;
+}
+
+.teaser-wrapper {
+  transform: scale(0.7);
+  transform-origin: top left;
+  width: 375px;
+}
+
+/* STATUS BAR */
+
+.status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 95%; 
+    height: 60px;
+
+    border: 1px solid #000;
+    background: #37FF00; /* #FF0000 = CLOSED, #FBB416 = RESTORING */
+}
+
+.status h1 {
+    font-family: "dm-mono";
+    font-size: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.14px;
+    margin: 0;
+    text-align: center;
+}
+
+/* IMAGE */
+
+.placeholder-img {
+    position: relative;
+    width: 95%;
+    height: 350px;
+
+    background: #C9C6C5;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.placeholder-img-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border: 1px solid #000;
+}
+
+/* TEXT SECTIONS */
+
+.building-name,
+.location,
+.restoration-deets {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 95%;
+    margin-top: 5px;
+
+    border: 1px solid #000;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.building-name h1,
+.location h1,
+.restoration-deets h1 {
+    font-family: "dm-mono";
+    font-size: 15px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.14px;
+    margin: 6px 0;
+}
+
+/* LEAFLET POPUP OVERRIDES - REMOVE SCROLLING */
+
+.leaflet-popup-content-wrapper {
+    background: black;
+    padding: 0;
+    box-shadow: none;
+    overflow: visible !important;
+}
+
+.teaser-popup .leaflet-popup-content {
+    margin: 0;
+    overflow: visible !important;
+    max-height: none !important;
+    width: auto !important;
+}
+
+.teaser-popup .leaflet-popup-tip-container {
+    display:visible;
+        overflow: visible !important;
+}
+
+.teaser-popup .leaflet-popup-close-button {
+    color: #fbb416 !important;
+    text-shadow: none !important;
+    font-size: 18px;
+        overflow: visible !important;
+}
+
+/* TIMELINE ELEMENTS */
+.timeline-title {
+    display: flex;
+    padding: 20px, 0px, 20px, 0px;
+    width:550px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    border: 1px solid #000;
+    background: rgba(213, 210, 205);
+}
+
+.timeline-title h1{
+    font-family: "dm-mono";
+    font-size: 15px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.14px;
+    color: black;
+    text-align: center;
+}
+
+.timeline-section{
+display: flex;
+width: 550px;
+height: 600px;
+margin-top:13px;
+align-items: center;
+
+border: 1px solid #000;
+background: rgba(213, 210, 205);
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: "dm-mono", monospace;
+}
+
+.timeline-item {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: flex-start;
+    margin-left:20px;
+    margin-right:20px;
+}
+
+.timeline-item .year {
+    flex: 0 0 120px; 
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 15px;
+}
+
+.timeline-item .description {
+    flex: 1;
+    text-align: left;
+    font-size:1 5px;
+}
+
+#timeline-panel{
+  position: fixed;
+  top:0;
+  left:0;
+  right: -100%;
+  width:100vw;
+  height:100vh;
+
+  display:none;
+
+  justify-content:center;
+  align-items:center;
+
+  background:rgba(0,0,0,0.2);
+
+  z-index:9998;
+}
+
+#timeline-panel.open{
+    right: 0;
+}
+
+#timeline-panel iframe{
+  width:650px;
+  height:700px;
+  border:none;
+}
+
+.description{
+    font-size: 15px;
+}
+
+html {
+  cursor: url("/Cursor Icon/2shovel_icon_150752.png") 2 2, auto;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow:hidden; /* removes scrollbars */
+  width: 100%;
+  height: 100%;
+}
+
+#about-component {
+    position:fixed;
+    top: 10%;
+    left: 0%;
+    transform:translate(-10%, -10%);
+
+    display: none;
+    width: 66%;
+    height:100%;
+    padding: 10px 10px 10px 109px;
+    align-items: flex-start;
+    gap: 10px;
+    background: rgba(213, 210, 205);
+    font-family:"dm-mono", monospace;
+    font-size:18px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.about-text{
+    font-family:"dm-mono";
+    font-size:10px;
+}
+
+.title-row{
+        font-family:"dm-mono";
+    font-size:10px;
+}
+
+body, html {
+    font-family: "dm-mono", monospace !important;
+    font-size: 18px;
+    color: black;
+}
+
+body{
+    font-family:"dm-mono",
+}
+
+h1, h2, h3, p{
+    font-family:"dm-mono",
+}

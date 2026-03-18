@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<!--URL: https://andrewskozak.github.io/-IN-COMPLETE/ -->
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://use.typekit.net/pnv2wal.css">
+
+
+    <title>[MAP]</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <link rel="stylesheet" href="script.js">
+
+    <style>
+        html, body { height: 100%; margin: 0; padding: 0; }
+        #map { width: 100%; height: 95%; }
+
+        .teaser-popup .leaflet-popup-content-wrapper {
+            background: transparent;
+            padding: 0;
+            box-shadow: none;
+        }
+
+        .teaser-popup .leaflet-popup-content {
+           margin: 0;
+           padding: 100px;
+          height:auto; }
+   
+        .teaser-popup .leaflet-popup-tip-container { display: none; }
+    </style>
+
+    <style>
+/* DM Mono Light */
+@font-face {
+  font-family: "dm-mono";
+  src: url("fonts/dm-mono-light.woff2") format("woff2"),
+       url("fonts/dm-mono-light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* DM Mono Regular */
+@font-face {
+  font-family: "dm-mono";
+  src: url("fonts/dm-mono-regular.woff2") format("woff2"),
+       url("fonts/dm-mono-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* DM Mono Medium */
+@font-face {
+  font-family: "dm-mono";
+  src: url("fonts/dm-mono-medium.woff2") format("woff2"),
+       url("fonts/dm-mono-medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+  var map = L.map('map', {
+      minZoom: 2,
+      maxZoom: 18,
+      zoomControl: false,
+  }).setView([51.5, -0.09], 5);
+
+  // Tile layer
+  L.tileLayer('https://api.maptiler.com/maps/toner-v2/{z}/{x}/{y}.png?key=qZc9X8NrDe8BuxW9Ogr5', {
+      attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+  }).addTo(map);
+
+  // Constrain map bounds
+  var southWest = L.latLng(-90, -180),
+      northEast = L.latLng(90, 180),
+      bounds = L.latLngBounds(southWest, northEast);
+  map.setMaxBounds(bounds);
+  map.on('drag', function() {
+      map.panInsideBounds(bounds, { animate: false });
+  });
+
+  // Custom marker
+  var leafletIcon = L.icon ({
+      iconUrl: 'marker/marker.png',
+      iconSize: [38,38],
+      iconAnchor: [19,38]
+  });
+  
+
+/* BUILDING DATA */
+
+var buildings = [
+
+
+  {
+    name: "Eiffel Tower",
+    location: "Paris, France",
+    status: "OPEN",
+    restoration: "Restoring",
+    coords: [48.8584, 2.2945],
+    image:"Archive Images/Eiffel Tower/fcd0b1a1fb9df1168b59edacc1c4c574778e76ad-2215x1477.avif",
+
+  timeline: [
+    { year: "2018–2026", text: "20th repainting of the entire tower" },
+    { year: "2017–2018", text: "Updated interior shopping areas" },
+    { year: "2011–2014", text: "Glass floor installations" }
+  ]
+  },
+
+  {
+    name: "Notre-Dame",
+    location: "Paris, France",
+    status: "RESTORING",
+    restoration: "Restoring",
+    coords: [48.8530, 2.3499],
+    image: "Archive Images/Notre Dame/960x0.jpg",
+  },
+
+    {
+    name: "Parthenon",
+    location: "Athens, Greece",
+    status: "Open",
+    coords: [37.9715, 23.7267],
+    image: "Archive Images/Parthenon/restoration_work_parthenon_facade_acropolis_athens_greece.webp",
+  },
+
+    {
+    name: "Arc de Triomphe",
+    location: "Paris, France",
+    status: "RESTORING",
+    restoration: "open",
+    coords: [48.8738, 2.2950],
+    image: "Archive Images/Arc de Triomphe/eac9c4f9-c4f9-45f7-9940-b2c54e37f3d2.jpeg",
+  },
+
+    {
+    name: "Cologne Cathedral",
+    location: "Cologne, Germany",
+    status: "RESTORING",
+    restoration: "Under constant restoration",
+    coords: [50.9413, 6.9583],
+    image: "Archive Images/Cologne Cathedral/motion-array-4033805-gag7qiU51c-high_0009.avif",
+  },
+
+  {
+    name: "Dom Tower",
+    location: "Utrecht, the Netherlands",
+    status: "RESTORING",
+    restoration: "OPEN",
+    coords: [52.0908, 5.1213],
+    image: "Archive Images/Dom Tower/Utrecht_Centrum_Domtoren_JelleVerhoeks_600x480-e1649756902467.jpg",
+  },
+
+  {
+    name: "Hagia Sophia",
+    location: "Istanbul, Turkey",
+    status: "RESTORING",
+    restoration: "EXTENSIVE RESTORATION",
+    coords: [41.0086, 28.9802],
+    image: "Archive Images/Hagia Sophia/xbIHT76Ade5USjgz.jpeg",
+  },
+
+    {
+    name: "HEYDAR ALIYEV CENTER",
+    location: "Baku, Azerbaijan",
+    status: "Completed",
+    restoration: "open",
+    coords: [40.3959, 49.8678],
+    image: "Archive Images/Heydar Aliyev Centre/add04.jpg",
+  },
+
+      {
+    name: "Church of the Assumption of the Blessed Virgin Mary",
+    location: "Krakow, Poland",
+    status: "RESTORING",
+    restoration: "open",
+    coords: [50.06152, 19.93968],
+    image: "Archive Images/Krakow Basilica/original_8b6f0ecf371672f3d71a3dd0c13fb481.jpg",
+  },
+
+      {
+    name: "Pantheon",
+    location: "Rome, Italy",
+    status: "RESTORING",
+    restoration: "open",
+    coords: [41.8986, 12.4769],
+    image: "Archive Images/Pantheon/Restoration_of_the_Pantheon_in_Rome_sightseing_tours.jpg",
+  },
+
+       {
+    name: "Leaning Tower of Pisa",
+    location: "Pisa, Italy",
+    status: "RESTORING",
+    restoration: "open",
+    coords: [43.7230, 10.3966],
+    image: "Archive Images/Pisa Tower/f252bbe5151e2ce90947744148fc9f85.jpg",
+  },
+
+       {
+    name: "Sagrada Familia",
+    location: "Barcelona, Spain",
+    status: "RESTORING",
+    restoration: "Under construction since 1882",
+    coords: [41.4036, 2.1744],
+    image: "Archive Images/Sagrada Familia/e2859a6a-9691-4e83-9172-b0b19c4a62b3.jpg",
+  },
+
+       {
+    name: "Saint Peter's Basilica",
+    location: "Vatican City",
+    status: "RESTORING",
+    restoration: "Extensive restorations",
+    coords: [41.9022, 12.4539],
+    image: "Archive Images/St Peters Basilica/CNS-20240222T0850-BASILICA-BALDACHIN-SCAFFOLDING-1773079.jpg",
+  },
+
+       {
+    name: "Fallingwater",
+    location: "Uniontown, Pennsylvania",
+    status: "RESTORING",
+    restoration: "Restoring",
+    coords: [39.9061, -79.4668],
+    image: "Archive Images/Fallingwater/7NU4DZRFMFG6DPT2M6ZG4HLWOI.jpeg",
+  },
+
+      {
+    name: "TAJ MAHAL",
+    location: "Agra, Uttar Pradesh, India",
+    status: "RESTORING",
+    restoration: "Restoring",
+    coords: [27.1751, 78.0421],
+    image: "Archive Images/Taj Mahal/00tajmahal-7-articleLarge.webp",
+  },
+
+        {
+    name: "Colosseum",
+    location: "Rome, Italy",
+    status: "RESTORING",
+    restoration: "Restoring",
+    coords: [41.8902, 12.4922],
+    image: "Archive Images/Colosseum/01_Tod-s_For_Colosseum_view_02.webp",
+
+
+
+      },
+  
+];
+
+
+/* CREATE MARKERS */
+
+buildings.forEach(function(building) {
+
+  // Create marker
+  var marker = L.marker(building.coords, {icon: leafletIcon}).addTo(map);
+
+var popupContent = `
+  <iframe 
+    src="teaser.html?building=${encodeURIComponent(building.name)}
+        &location=${encodeURIComponent(building.location)}
+        &status=${encodeURIComponent(building.status)}
+        &restoration=${encodeURIComponent(building.restoration)}
+        &image=${encodeURIComponent(building.image)}"
+    style="width:300px; aspect-ratio:375/500; border:none;">
+  </iframe>
+`;
+
+  // Bind popup
+  marker.bindPopup(popupContent, {
+    maxWidth: 310,
+    minWidth: 300,
+    className: "teaser-popup"
+  });
+
+  // Popup open listener
+  marker.on('popupopen', function(e) {
+    const popupNode = e.popup.getElement();
+    if (!popupNode) return;
+
+    const iframe = popupNode.querySelector('iframe');
+    if (!iframe) return;
+
+
+      const trigger = iframeDoc.getElementById('timeline-trigger');
+      if (trigger) {
+        trigger.onclick = function() {
+          openTimeline(building);
+        };
+      }
+    }
+  )});
+
+</script>
+
+<div id="timeline-panel" style="display:none; 
+     position:fixed; top:0; left:0; width:50vw; height:100vh; z-index:999; 
+     background: rgba(0,0,0,0);">
+  <iframe id="timeline-frame" src="" style="width:80%; height:100%; border:none; 
+           position:absolute; top:0%; left:0%;"></iframe>
+</div>
+
+<script>
+  const timelinePanel = document.getElementById('timeline-panel');
+  const timelineFrame = document.getElementById('timeline-frame');
+
+  // Listen for messages from iframe trigger
+  window.addEventListener('message', function(event) {
+    if (event.data.action === 'openTimeline') {
+      openTimeline(event.data.building);
+    }
+  });
+
+  // Close timeline when clicking outside the iframe
+  timelinePanel.addEventListener('click', function(e) {
+    if (e.target === timelinePanel) { // only clicks on the overlay background
+      timelinePanel.style.display = 'none';
+      timelineFrame.src = '';
+    }
+  });
+
+  // Optional: close timeline with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && timelinePanel.style.display === 'block') {
+      timelinePanel.style.display = 'none';
+      timelineFrame.src = '';
+    }
+  });
+
+  function openTimeline(buildingName) {
+    timelinePanel.style.display = 'block';
+    timelineFrame.src = `timeline.html?building=${encodeURIComponent(buildingName)}`;
+  }
+</script>
+</div>
+
+  <footer class="footer">
+    <a href="/" class="footer-link">Home</a>
+    <a href="/about" class="footer-link">About</a>
+</footer>
+
+<!-- ABOUT COMPONENT -->
+<div id="about-component" class="about-component" style="display: none;">
+    <div class="about-outline"></div>
+    <div class="about-text">
+        <div class="background">
+            <div class="title-row">
+    <h1>We often think of the buildings that make up our urban landscape as being static objects, each with its own function. 
+        The ones that stand out are artifacts that become embedded in our culture and history.<br></br> 
+
+        This work started as an archive to document current restorations of these artifacts. When visiting these beautiful sites, I was frustrated 
+        with seeing them covered in scaffolding and fencing, which I found diminished the work underneath and coloured an otherwise pleasurable trip. <br></br>
+
+        But actually, scaffolding tells us a lot about what’s going on underneath. Scaffolding is evidence that these buildings and artifacts are
+        dynamic organisms that make up our cities. They are not built once and then forgotten, but maintained over time. We pass these artifacts 
+        along to the next generation because they are valuable. They have meaning that lies beyond simple brick and mortar. 
+        These buildings hold histories, cultures, and craftsmanship. <br></br>
+
+       We look after them because we have decided that they hold value. We spend money, time, and effort on old buildings, paintings, sculptures, 
+        and archeological ruins because preserving them has become a core part of being human. We never met the people who made them, but they hold such
+        significance that they endure generations. These artifacts hold a thread that binds us together.<br></br>
+
+        On April 15th 2019, a fire broke out in the roof of the Notre-Dame Cathedral in Paris which destroyed its centuries old framework and 
+        19th century spire. For years it was closed to the public while it was tirelessly restored by 2000 skilled artisans, carpenters, 
+        stonemasons, painters, and architects. 340,000 donors from 150 countries supported the effort financially. <br></br>
+
+        The 860 year old cathedral reopened to visitors in December 2024. This work serves as a reminder that even if the aesthetic 
+        quality of these artifacts is diminished, scaffolding is a temporary structure that signify value underneath.<br></br>
+
+        These are not objects for us to possess or capture for ourselves, but reminders of enduring human achievement that 
+        populates our cities and the responsibility we hold for the preservation of the past to be enjoyed by the future. <br></br>
+</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+const aboutLink = document.querySelector('.footer-link[href="/about"]');
+const aboutComponent = document.getElementById('about-component');
+
+aboutLink.addEventListener('click', function(e){
+    e.preventDefault();
+    aboutComponent.style.display = (aboutComponent.style.display === 'flex') ? 'none' : 'flex';
+});
+
+// close when clicking the outline (background)
+const aboutOutline = document.querySelector('.about-outline');
+aboutOutline.addEventListener('click', function(){
+    aboutComponent.style.display = 'none';
+});
+
+// close when clicking anywhere outside the About component
+document.addEventListener('click', function(e){
+    if (aboutComponent.style.display === 'flex' && !aboutComponent.contains(e.target) && e.target !== aboutLink) {
+        aboutComponent.style.display = 'none';
+    }
+});
+</script>
+
+<script src="script.js"></script>
+
+<script>
+  // Listen for messages from iframe popups
+  window.addEventListener('message', function(event) {
+    if (event.data.action === 'openTimeline') {
+      const buildingName = event.data.building;
+      openTimeline(buildingName); // your existing function that opens the timeline overlay
+    }
+  });
+</script>
+
+<script>
+  // Listen for messages from iframes
+  window.addEventListener('message', function(event) {
+    if (event.data.action === 'openTimeline') {
+      const buildingName = event.data.building;
+      openTimeline(buildingName); // your function that opens the timeline overlay
+    }
+  });
+
+  function openTimeline(buildingName) {
+    // Example: show timeline overlay and load the correct building timeline
+    const timelinePanel = document.getElementById('timeline-panel');
+    const timelineFrame = document.getElementById('timeline-frame');
+    timelinePanel.style.display = 'block';
+    timelineFrame.src = `timeline.html?building=${encodeURIComponent(buildingName)}`;
+  }
+  
+</script>
+
+<script id="g0r9qk">
+function setStatus(text, color) {
+    const status = document.getElementById("status-text");
+    status.textContent = text;
+
+    // optional: change background color too
+    status.parentElement.style.background = color;
+}
+</script>
+
+</body>
+</html>
